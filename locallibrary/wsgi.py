@@ -8,9 +8,17 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+path = '/home/ables/catalog'
+
+if path not in sys.path:
+    sys.path.append(path)
 
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locallibrary.settings")
 
-application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+application = StaticFilesHandler(get_wsgi_application())
